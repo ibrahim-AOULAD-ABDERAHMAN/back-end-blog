@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
 use App\Http\Resources\BlogResource;
 use App\Repository\BlogRepository;
 use Illuminate\Http\Request;
@@ -17,17 +18,18 @@ class BlogController extends Controller
         $this->blogRepository = $blogRepository;
     }
 
-    public function index(Request $request)
+    public function index(BlogRequest $blogRequest)
     {
         try{
-            return BlogResource::collection($this->blogRepository->getAll($request));
+            $data = $blogRequest->validated();
+            return BlogResource::collection($this->blogRepository->getAll($data));
         }catch(\Exception $errors){
             Log::error("Error *index BlogController*, IP: " . FacadesRequest::getClientIp(true) . ", {$errors->getMessage()}");
             return response()->json(['errors' => $errors->getMessage()], 500);
         }
     }
 
-    public function show($id, Request $request)
+    public function show($id, BlogRequest $blogRequest)
     {
         try{
             return new BlogResource($this->blogRepository->getById($id));
@@ -37,27 +39,29 @@ class BlogController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(BlogRequest $blogRequest)
     {
         try{
-            return new BlogResource($this->blogRepository->create($request));
+            $data = $blogRequest->validated();
+            return new BlogResource($this->blogRepository->create($data));
         }catch(\Exception $errors){
             Log::error("Error *store BlogController*, IP: " . FacadesRequest::getClientIp(true) . ", {$errors->getMessage()}");
             return response()->json(['errors' => $errors->getMessage()], 500);
         }
     }
 
-    public function update($id, Request $request)
+    public function update($id, BlogRequest $blogRequest)
     {
         try{
-            return new BlogResource($this->blogRepository->update($id, $request));
+            $data = $blogRequest->validated();
+            return new BlogResource($this->blogRepository->update($id, $data));
         }catch(\Exception $errors){
             Log::error("Error *update BlogController*, IP: " . FacadesRequest::getClientIp(true) . ", {$errors->getMessage()}");
             return response()->json(['errors' => $errors->getMessage()], 500);
         }
     }
 
-    public function delete($id, Request $request)
+    public function delete($id, BlogRequest $blogRequest)
     {
         try{
             return new BlogResource($this->blogRepository->delete($id));

@@ -18,7 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -41,4 +42,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the allowed actions list associated with the User.
+     */
+    public function allowed_actions()
+    {
+        return $this->belongsToMany(Action::class, 'allowed_actions', 'id_user', 'id_action');
+    }
+
+    /**
+     * Get the Role record associated with the Allowed action.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'id_role', 'id');
+    }
+
 }

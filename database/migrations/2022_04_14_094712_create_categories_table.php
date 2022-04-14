@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50)->nullable();
-            $table->text('body')->nullable();
-            $table->string('image', 50)->nullable();
-            $table->integer('id_category');
-            $table->foreign('id_category')->references('id')->on('categories');
-                // ->onUpdate('cascade');
-                // ->onDelete('cascade');
+            $table->string('name', 30)->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('categories');
     }
 };

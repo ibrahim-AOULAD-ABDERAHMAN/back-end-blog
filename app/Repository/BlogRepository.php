@@ -32,7 +32,9 @@ class BlogRepository {
         $new_blog = new $this->blog;
         $new_blog->title       = $data['title'];
         $new_blog->body        = $data['body'];
+        if(isset($data['image'])){
         $new_blog->image       = Helper::saveFile($data['image'], 'blogs');
+        }
         $new_blog->id_category = $data['id_category'];
         $new_blog->save();
 
@@ -44,7 +46,9 @@ class BlogRepository {
         $update_blog = $this->blog->where('id', $id)->first();
         $update_blog->title       = $data['title'];
         $update_blog->body        = $data['body'];
-        $update_blog->image       = Helper::saveFile($data['image'], 'blogs');
+        if(isset($data['image'])){
+            $update_blog->image       = Helper::saveFile($data['image'], 'blogs');
+        }
         $update_blog->id_category = $data['id_category'];
         $update_blog->update();
 

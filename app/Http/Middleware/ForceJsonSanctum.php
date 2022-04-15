@@ -17,11 +17,17 @@ class ForceJsonSanctum
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd('request');
         // Force Json accept type
-        if (! Str::contains($request->header('accept'), ['/json', '+json'])) {
-            $request->headers->set('accept', 'application/json,' . $request->header('accept'));
-        }
+        // if (! Str::contains($request->header('accept'), ['/json', '+json'])) {
+        //     $request->headers->set('accept', 'application/json,' . $request->header('accept'));
 
-        return $next($request);
+        // }
+        $response = $next($request);
+
+        $response->headers->set('Accept', 'application/json');
+            dd($response);
+        return $response;
+        // return $next($request);
     }
 }

@@ -32,7 +32,7 @@ class BlogRequest extends BaseRequest
     public function rules()
     {
         return match (Route::currentRouteName()) {
-            'blogs-index'   => $this->filter(),
+            'blogs-index'   =>$this->filterDta(),
             'blogs-show', 'blogs-delete' => ['id' => 'exists:blogs,id'],
             'blogs-store'   => $this->storeOrUpdate(),
             'blogs-update'  => ['id' => 'exists:blogs,id'] + $this->storeOrUpdate(),
@@ -50,7 +50,7 @@ class BlogRequest extends BaseRequest
         ];
     }
 
-    public function filter()
+    public function filterDta()
     {
         return [
             'title' => 'nullable',

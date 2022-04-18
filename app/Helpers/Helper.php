@@ -20,11 +20,14 @@ class Helper
     //     return $user->role->role == Helper::INTEGRATOR_ROLE;
     // }
 
-    // public static function isAdmin()
-    // {
-    //     $user = auth::user();
-    //     return $user->role->role == Helper::ADMIN_ROLE;
-    // }
+    public static function isAdmin()
+    {
+        $user = auth::user();
+        if($user)
+        return $user->role->role == Helper::ADMIN_ROLE;
+
+        return false;
+    }
 
     // public static function isUser()
     // {

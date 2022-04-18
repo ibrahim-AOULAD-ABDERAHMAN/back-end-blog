@@ -17,7 +17,6 @@ class ForceJsonSanctum
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd('request');
         // Force Json accept type
         if (! Str::contains($request->header('accept'), ['/json', '+json'])) {
             $request->headers->set('accept', 'application/json,' . $request->header('accept'));

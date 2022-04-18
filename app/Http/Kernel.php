@@ -66,4 +66,12 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'force_json_sanctum' => ForceJsonSanctum::class, // Had Middleware katreja3 JSON ( "message": "Unauthenticated.")
     ];
+
+    // Hadi kan3adloha bax dekhdemna hadi ForceJsonSanctum
+    protected $middlewarePriority = [
+        // ...
+            \App\Http\Middleware\SetDefaultLocaleForUrls::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // ...
+    ];
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 class BlogRequest extends BaseRequest
@@ -14,7 +16,16 @@ class BlogRequest extends BaseRequest
      */
     public function authorize()
     {
-        return true;
+        if(Helper::isAdmin()) return true;
+
+        return match (Route::currentRouteName()) {
+            'blogs-index', 'blogs-show'  => true,
+            'blogs-delete'  => Gate::authorize('delete-blog'),
+            'blogs-store'   => Gate::authorize('store-blog'),
+            'blogs-update'  => Gate::authorize('update-blog'),
+            default => false,
+        };
+
     }
 
     protected function prepareForValidation()
@@ -56,6 +67,7 @@ class BlogRequest extends BaseRequest
     {
         return [
             'title' => 'nullable',
+            'pagination' => 'nullable'
         ];
     }
 }

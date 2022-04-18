@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title', 50)->nullable();
             $table->text('body')->nullable();
             $table->string('image', 50)->nullable();
-            $table->foreignId('id_category')->unsigned();
-            $table->foreign('id_category')->references('id')->on('categories')->onUpdate('cascade');
+            // $table->foreignId('id_category')->unsigned();
+            // $table->foreign('id_category')->references('id')->on('categories')->onUpdate('cascade');
             $table->timestamps();
         });
     }

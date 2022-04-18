@@ -19,7 +19,7 @@ class BlogResource extends JsonResource
             'title'         => $this->title,
             'description'   => $this->body,
             'image'         => $this->image,
-            'category'      => $this->category->name ?? null,
+            'sections'      => $this->sections ?? null,
             'created_at'    => $this->created_at,
             // 'updated_at' => $this->updated_at,
         ];

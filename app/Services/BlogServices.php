@@ -18,11 +18,7 @@ class BlogServices
             $query = $query->search($filter['title']);
         }
 
-        if(isset($filter['id_category']) && $filter['id_category'] > 0 ){
-            $query = $query->where('id_category' , '=' , $filter['id_category']);
-        }
-
-        return $query->paginate($pagination);
+        return $query->with('sections:id,title,body')->paginate($pagination);
     }
 }
 ?>

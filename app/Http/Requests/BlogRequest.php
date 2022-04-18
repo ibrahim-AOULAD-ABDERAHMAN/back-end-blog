@@ -43,10 +43,12 @@ class BlogRequest extends BaseRequest
     public function storeOrUpdate()
     {
         return [
-            'title'         => ['bail', 'required', 'max:100'],
-            'body'          => ['bail', 'required', 'max:60000'],
-            'image'         => ['bail', 'nullable', 'mimes:jpg,jpeg,png'],
-            'id_category'   => ['bail',  'required', 'exists:categories,id']
+            'title'             => ['bail', 'required', 'max:100'],
+            'body'              => ['bail', 'required', 'max:60000'],
+            'image'             => ['bail', 'nullable', 'mimes:jpg,jpeg,png'],
+            'sections'          => ['bail', 'nullable', 'array'],
+            'sections.title'    => ['bail' ,'nullable', 'max:100'],
+            'sections.body'     => ['bail' ,'nullable', 'max:60000'],
         ];
     }
 
@@ -54,7 +56,6 @@ class BlogRequest extends BaseRequest
     {
         return [
             'title' => 'nullable',
-            'id_category' => 'nullable'
         ];
     }
 }

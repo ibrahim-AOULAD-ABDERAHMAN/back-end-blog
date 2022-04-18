@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Helpers\Helper;
 use App\Models\Blog;
+use App\Models\Section;
 use App\Services\BlogServices;
 
 class BlogRepository {
@@ -24,7 +25,7 @@ class BlogRepository {
 
     public function getById($id)
     {
-        return $this->blog->where('id', $id)->first();
+        return $this->blog->where('id', $id)->with('sections:id,title,body')->first();
     }
 
     public function create($data)
@@ -35,8 +36,16 @@ class BlogRepository {
         if(isset($data['image'])){
         $new_blog->image       = Helper::saveFile($data['image'], 'blogs');
         }
-        $new_blog->id_category = $data['id_category'];
         $new_blog->save();
+
+        if( isset($data['sections'])  and count($data['sections']) > 0 ){
+            foreach($data['sections'] as $key => $setion){
+                $new_section = new Section();
+                $new_section->title   = $setion['title'];
+                $new_section->body    = $setion['body'];
+                $new_section->save();
+            }
+        }
 
         return $new_blog;
     }
@@ -49,8 +58,17 @@ class BlogRepository {
         if(isset($data['image'])){
             $update_blog->image       = Helper::saveFile($data['image'], 'blogs');
         }
-        $update_blog->id_category = $data['id_category'];
         $update_blog->update();
+
+        $update_blog->sections()->delete();
+        if( isset($data['sections'])  and count($data['sections']) > 0 ){
+            foreach($data['sections'] as $key => $setion){
+                $new_section = new Section();
+                $new_section->title   = $setion['title'];
+                $new_section->body    = $setion['body'];
+                $new_section->save();
+            }
+        }
 
         return $update_blog;
     }

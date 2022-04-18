@@ -24,6 +24,6 @@ class Blog extends Model
 
     public function sections()
     {
-        return $this->hasMany(Section::class, 'id_blogs', 'id');
+        return $this->hasMany(Section::class, 'id_blog', 'id');
     }
 }

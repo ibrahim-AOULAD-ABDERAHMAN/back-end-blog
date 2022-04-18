@@ -18,7 +18,7 @@ class BlogServices
             $query = $query->search($filter['title']);
         }
 
-        return $query->with('sections:id,title,body')->paginate($pagination);
+        return $query->with('sections')->paginate($pagination);
     }
 }
 ?>

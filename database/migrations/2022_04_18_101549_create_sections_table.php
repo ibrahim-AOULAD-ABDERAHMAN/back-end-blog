@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50)->nullable();
-            $table->text('body')->nullable();
+            $table->string('section_title', 50)->nullable();
+            $table->text('section_body')->nullable();
             $table->foreignId('id_blog')->unsigned();
             $table->foreign('id_blog')->references('id')->on('blogs')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

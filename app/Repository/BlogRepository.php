@@ -25,7 +25,7 @@ class BlogRepository {
 
     public function getById($id)
     {
-        return $this->blog->where('id', $id)->with('sections:id,title,body')->first();
+        return $this->blog->where('id', $id)->with('sections')->first();
     }
 
     public function create($data)
@@ -41,8 +41,9 @@ class BlogRepository {
         if( isset($data['sections'])  and count($data['sections']) > 0 ){
             foreach($data['sections'] as $key => $setion){
                 $new_section = new Section();
-                $new_section->title   = $setion['title'];
-                $new_section->body    = $setion['body'];
+                $new_section->section_title   = $setion['section_title'];
+                $new_section->section_body    = $setion['section_body'];
+                $new_section->id_blog         = $new_blog->id;
                 $new_section->save();
             }
         }
@@ -64,8 +65,9 @@ class BlogRepository {
         if( isset($data['sections'])  and count($data['sections']) > 0 ){
             foreach($data['sections'] as $key => $setion){
                 $new_section = new Section();
-                $new_section->title   = $setion['title'];
-                $new_section->body    = $setion['body'];
+                $new_section->section_title   = $setion['section_title'];
+                $new_section->section_body    = $setion['section_body'];
+                $new_section->id_blog         = $update_blog->id;
                 $new_section->save();
             }
         }

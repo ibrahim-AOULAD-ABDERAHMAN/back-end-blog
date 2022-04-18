@@ -43,12 +43,12 @@ class BlogRequest extends BaseRequest
     public function storeOrUpdate()
     {
         return [
-            'title'             => ['bail', 'required', 'max:100'],
-            'body'              => ['bail', 'required', 'max:60000'],
-            'image'             => ['bail', 'nullable', 'mimes:jpg,jpeg,png'],
-            'sections'          => ['bail', 'nullable', 'array'],
-            'sections.title'    => ['bail' ,'nullable', 'max:100'],
-            'sections.body'     => ['bail' ,'nullable', 'max:60000'],
+            'title'                     => ['bail', 'required', 'max:100'],
+            'body'                      => ['bail', 'required', 'max:60000'],
+            'image'                     => ['bail', 'nullable', 'mimes:jpg,jpeg,png'],
+            'sections'                  => ['bail', 'nullable', 'array'],
+            'sections.*.section_title'  => ['bail' ,'nullable', 'max:100'],
+            'sections.*.section_body'   => ['bail' ,'nullable', 'max:60000'],
         ];
     }
 

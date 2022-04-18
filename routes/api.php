@@ -29,9 +29,9 @@ Route::group(['middleware'=> ['force_json_sanctum']], function (){
     // Route::group(['middleware'=> ['auth:sanctum']], function (){
 
         Route::get('/blogs',            [BlogController::class, 'index'])->name('blogs-index');
-    //     Route::post('/blogs',           [BlogController::class, 'store'])->name('blogs-store');
-    //     Route::put('/blogs/{id}',       [BlogController::class, 'update'])->name('blogs-put');
-    //     Route::delete('/blogs/{id}',    [BlogController::class, 'delete'])->name('blogs-delete');
+        Route::post('/blogs',           [BlogController::class, 'store'])->name('blogs-store');
+        Route::put('/blogs/{id}',       [BlogController::class, 'update'])->name('blogs-update');
+        Route::delete('/blogs/{id}',    [BlogController::class, 'delete'])->name('blogs-delete');
 
     // });
 

@@ -12,8 +12,8 @@ class Section extends Model
     protected $table = 'sections';
 
     protected $fillable = [
-        'title',
-        'body',
+        'section_title',
+        'section_body',
         'id_blog',
     ];
 

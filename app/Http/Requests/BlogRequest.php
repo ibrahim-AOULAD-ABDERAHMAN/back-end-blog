@@ -67,7 +67,7 @@ class BlogRequest extends BaseRequest
     {
         return [
             'title' => 'nullable',
-            'pagination' => 'nullable'
+            'count_per_page' => 'nullable'
         ];
     }
 }

@@ -39,7 +39,7 @@ class AuthController extends Controller
             if($result){
                 return Response()->json(['data' => $result], 200);
             }else{
-                return response()->json(['errors' => 'This email or pasword incorrect !'], 422);
+                return response()->json(['incorrect_infos' => 'This email or pasword incorrect !'], 422);
             }
         }catch(\Exception $errors){
             Log::error("Error *register AuthController*, IP: " . requestFacades::getClientIp(true) . ", {$errors->getMessage()}");
@@ -52,8 +52,8 @@ class AuthController extends Controller
         if(Auth::user()){
             Auth::user()->update(['last_login' => now()]);
             Auth::user()->tokens()->delete();
-            return 'Logged out';
+            return response()->json(['data' => 'Logged out'], 200);
         }
-        return 'Something wrong !';
+        return response()->json(['error' => 'something wrong !!'], 422);
     }
 }

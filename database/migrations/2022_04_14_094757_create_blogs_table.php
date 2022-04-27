@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50)->nullable();
+            $table->string('title', 100)->nullable();
             $table->text('body')->nullable();
             $table->string('image', 50)->nullable();
             // $table->foreignId('id_category')->unsigned();

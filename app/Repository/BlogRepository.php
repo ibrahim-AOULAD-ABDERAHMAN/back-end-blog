@@ -37,7 +37,7 @@ class BlogRepository {
         $new_blog->image       = Helper::saveFile($data['image'], 'blogs');
         }
         $new_blog->save();
-
+       
         if( isset($data['sections'])  and count($data['sections']) > 0 ){
             foreach($data['sections'] as $key => $setion){
                 $new_section = new Section();

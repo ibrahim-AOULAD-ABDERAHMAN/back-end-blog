@@ -45,7 +45,7 @@ class AuthRepository
         if(!$user || !Hash::check($data['password'], $user->password)){
             return false;
         }
-        $user->tokens()->delete();
+        // $user->tokens()->delete();
         $token = $user->createToken($data['email'])->plainTextToken;
         return [
                 'first_name'   => $user->first_name,

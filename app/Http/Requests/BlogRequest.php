@@ -31,9 +31,23 @@ class BlogRequest extends BaseRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'id' => $this->route('id')
+            'id' => $this->route('id'),
         ]);
+
+        // JSON sectionsions
+        if($this->sections && is_array($this->sections)){
+            $sections = [];
+            foreach($this->sections as $key => $section){
+                if (is_string($section))
+                $sections[] = json_decode($section, true);
+            }
+            if($sections)
+            $this->merge([
+                'sections' => $sections,
+            ]);
+        }
     }
+
 
     /**
      * Get the validation rules that apply to the request.
